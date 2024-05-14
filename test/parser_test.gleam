@@ -1,7 +1,7 @@
-import escapes
 import gleam/dict
 import gleeunit/should
-import parser.{
+import json_parser/escapes
+import json_parser/parser.{
   ArrayMissingComma, JsonArray, JsonBool, JsonFloat, JsonInt, JsonNull,
   JsonObject, JsonString, ObjectDuplicateKey, ObjectMissingColon,
   ObjectMissingComma, ObjectMissingKey, UnexpectedToken, UnmatchedTokens, parse,

@@ -1,6 +1,6 @@
-import escapes
 import gleeunit/should
-import lexer.{
+import json_parser/escapes
+import json_parser/lexer.{
   ColonToken, CommaToken, FalseToken, FloatToken, IntToken, InvalidDot,
   InvalidEscape, InvalidExponent, InvalidToken, LeftCurlyBraceToken,
   LeftSquareBraceToken, NoNumberAfterDot, NoNumberAfterExponent, NullToken,

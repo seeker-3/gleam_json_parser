@@ -4,7 +4,7 @@ import gleam/float
 import gleam/int
 import gleam/result.{try}
 import gleam/string
-import lexer.{
+import json_parser/lexer.{
   type TokenizeError, ColonToken, CommaToken, FalseToken, FloatToken, IntToken,
   LeftCurlyBraceToken, LeftSquareBraceToken, NullToken, RightCurlyBraceToken,
   RightSquareBraceToken, StringToken, TrueToken, tokenize,
@@ -114,8 +114,8 @@ fn parse_value(tokens) {
     [LeftSquareBraceToken, ..rest] ->
       rest
       |> parse_array(False)
-      |> try(fn(x) {
-        let #(array, rest) = x
+      |> try(fn(array_rest) {
+        let #(array, rest) = array_rest
 
         array
         |> JsonArray
@@ -124,8 +124,8 @@ fn parse_value(tokens) {
     [LeftCurlyBraceToken, ..rest] ->
       rest
       |> parse_object(False)
-      |> try(fn(x) {
-        let #(object, rest) = x
+      |> try(fn(object_rest) {
+        let #(object, rest) = object_rest
         object
         |> JsonObject
         |> add_rest(rest)
@@ -134,9 +134,9 @@ fn parse_value(tokens) {
   }
 }
 
-fn match_token(tokens, symbol, error) {
+fn match_token(tokens, token, error) {
   case tokens {
-    [s, ..tokens] if s == symbol -> Ok(tokens)
+    [t, ..tokens] if t == token -> Ok(tokens)
     _ -> Error(error)
   }
 }

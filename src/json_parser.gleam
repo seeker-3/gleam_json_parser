@@ -1,6 +1,19 @@
-import gleam/float
-import gleam/io
+import gleam/io.{debug, println}
+
+import json_parser/parser.{parse}
 
 pub fn main() {
-  io.debug(float.parse("2.2"))
+  let data = parse("[1, 2, 3]")
+  case data {
+    Ok(value) -> {
+      println("Parsed successfully")
+      debug(value)
+      Nil
+    }
+    Error(error) -> {
+      println("Failed to parse")
+      debug(error)
+      Nil
+    }
+  }
 }
